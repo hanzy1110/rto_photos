@@ -1,7 +1,7 @@
 #!/bin/bash
 set -xe
 PASSWORD="camarasuncosma2020"
-OUTFILE="/home/admintaller/vigilancia.mp4"
+OUTPUT_FILE="/home/admintaller/vigilancia.mp4"
 
 RTSP_URL="rtsp://admin:${PASSWORD}@192.168.1.12:554/cam/realmonitor?channel=1&subtype=0"
 # Start capturing the RTSP feed and save it to a file
