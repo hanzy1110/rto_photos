@@ -23,7 +23,7 @@ for ((i = 1; i <= NUM_PICTURES; i++)); do
 
     # Capture a single frame
     ffmpeg -i "$RTSP_URL" -vf "select=eq(pict_type\,I)" -vframes 1 -c:v libx264 -crf 0 "$OUTPUT_FILE"
-    ffmpef -i $OUTPUT_FILE $$OUTPUT_FILE_JPG
+    ffmpeg -i $OUTPUT_FILE $$OUTPUT_FILE_JPG
 
     echo "Captured picture $i at $TIMESTAMP"
 
