@@ -27,19 +27,18 @@ for ((i = 1; i <= NUM_PICTURES; i++)); do
 
     echo "Captured picture $i at $TIMESTAMP"
 
-    if [ $? -eq 0 ]; then
-        echo "File uploaded to S3 successfully."
-        rm $OUTPUT_FILE $OUTPUT_FILE_JPG
-    else
-        echo "File upload to S3 failed."
-    fi
+    # if [ $? -eq 0 ]; then
+    #     echo "File uploaded to S3 successfully."
+    # else
+    #     echo "File upload to S3 failed."
+    # fi
 
     if [ $i -lt $NUM_PICTURES ]; then
         sleep $INTERVAL_SECONDS
     fi
 done
 
-gzip -c "$OUPUT_DIR" >"FOTOS_${TIMESTAMP}.zip"
+gzip -c "$OUTPUT_DIR" >"FOTOS_${TIMESTAMP}.zip"
 aws s3 cp "FOTOS_${TIMESTAMP}.zip" "$S3_DESTINATION"
 
 rm -rf $OUTPUT_DIR
