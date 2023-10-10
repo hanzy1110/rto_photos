@@ -38,6 +38,6 @@ for ((i = 1; i <= NUM_PICTURES; i++)); do
     fi
 done
 tar -czvf "FOTOS_${TIMESTAMP}.tar.gz" $OUTPUT_DIR
-aws s3 cp "FOTOS_${TIMESTAMP}.zip" "$S3_DESTINATION"
+aws s3 cp "FOTOS_${TIMESTAMP}.tar.gz" "$S3_DESTINATION"
 
 rm -rf $OUTPUT_DIR
