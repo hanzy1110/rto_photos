@@ -41,3 +41,5 @@ done
 
 gzip -c "$OUPUT_DIR" >"FOTOS_${TIMESTAMP}.zip"
 aws s3 cp "FOTOS_${TIMESTAMP}.zip" "$S3_DESTINATION"
+
+rm -rf $OUTPUT_DIR
