@@ -2,13 +2,15 @@
 set -xe
 source .env.prod
 
+CAM_IP=$1
+
 PASSWORD="camarasuncosma2020"
-OUTPUT_DIR="/home/admintaller/FOTOS"
-RTSP_URL="rtsp://admin:${PASSWORD}@192.168.1.12:554/cam/realmonitor?channel=1&subtype=0"
+OUTPUT_DIR="/home/admintaller/FOTOS_${CAM_IP}"
+RTSP_URL="rtsp://admin:${PASSWORD}@${CAM_IP}:554/cam/realmonitor?channel=1&subtype=0"
 mkdir -p $OUTPUT_DIR
 
 NUM_PICTURES=5
-INTERVAL_SECONDS=20
+INTERVAL_SECONDS=30
 
 S3_DESTINATION="s3://rto-nqn-files/FOTOS_TALLER"
 
@@ -38,8 +40,9 @@ for ((i = 1; i <= NUM_PICTURES; i++)); do
     fi
 done
 
-TAR_OUTPUT="FOTOS_${TIMESTAMP}.tar.gz"
+TAR_OUTPUT="${CAM_IP}_FOTOS_${TIMESTAMP}.tar.gz"
 tar -czvf "$TAR_OUTPUT" $OUTPUT_DIR
 aws s3 cp "$TAR_OUTPUT" "$S3_DESTINATION/${TAR_OUTPUT}"
 
+rm ./*.tar
 rm -rf $OUTPUT_DIR
