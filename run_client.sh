@@ -37,8 +37,7 @@ for ((i = 1; i <= NUM_PICTURES; i++)); do
         sleep $INTERVAL_SECONDS
     fi
 done
-
-gzip -c "$OUTPUT_DIR" >"FOTOS_${TIMESTAMP}.zip"
+tar -czvf "FOTOS_${TIMESTAMP}.tar.gz" $OUTPUT_DIR
 aws s3 cp "FOTOS_${TIMESTAMP}.zip" "$S3_DESTINATION"
 
 rm -rf $OUTPUT_DIR
