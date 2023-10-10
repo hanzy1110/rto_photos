@@ -10,15 +10,15 @@ mkdir -p $OUTPUT_DIR
 NUM_PICTURES=5
 INTERVAL_SECONDS=20
 
-S3_DESTINATION="s3://${S3_BUCKET}/rto-nqn-files"
+S3_DESTINATION="s3://rto-nqn-files/FOTOS_TALLER"
 
-aws configure set aws_access_key_id "$AWS_ACCESS_KEY"
-aws configure set aws_secret_access_key "$AWS_SECRET_KEY"
-aws configure set region "$AWS_DEFAULT_REGION"
+aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
+aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
+aws configure set region "us-east-1"
 
 for ((i = 1; i <= NUM_PICTURES; i++)); do
     TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
-    OUTPUT_FILE="$OUTPUT_DIR/snapshot_$TIMESTAMP.raw"
+    OUTPUT_FILE="$OUTPUT_DIR/snapshot_$TIMESTAMP.png"
     OUTPUT_FILE_JPG="$OUTPUT_DIR/snapshot_$TIMESTAMP.jpg"
 
     # Capture a single frame
