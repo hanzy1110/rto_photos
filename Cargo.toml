@@ -1,0 +1,18 @@
+[package]
+name = "client"
+version = "0.0.0"
+publish = false
+edition = "2021"
+rust-version = "1.64"
+
+[dependencies]
+bytes = "1.0.1"
+futures = "0.3.14"
+log = "0.4.8"
+tokio = { version = "1.5.0", features = ["fs", "io-util", "macros", "rt-multi-thread", "signal"] }
+url = "2.2.1"
+anyhow = "1.0.41"
+itertools = "0.10.1"
+mylog = { git = "https://github.com/scottlamb/mylog" }
+clap = { version = "4.1.4", features = ["derive"] }
+retina = "0.4.5"
