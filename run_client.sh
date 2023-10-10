@@ -37,7 +37,9 @@ for ((i = 1; i <= NUM_PICTURES; i++)); do
         sleep $INTERVAL_SECONDS
     fi
 done
-tar -czvf "FOTOS_${TIMESTAMP}.tar.gz" $OUTPUT_DIR
-aws s3 cp "FOTOS_${TIMESTAMP}.tar.gz" "$S3_DESTINATION"
+
+TAR_OUTPUT="FOTOS_${TIMESTAMP}.tar.gz"
+tar -czvf "$TAR_OUTPUT" $OUTPUT_DIR
+aws s3 cp "$TAR_OUTPUT" "$S3_DESTINATION/${TAR_OUTPUT}"
 
 rm -rf $OUTPUT_DIR
