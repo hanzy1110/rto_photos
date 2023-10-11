@@ -44,5 +44,5 @@ TAR_OUTPUT="${CAM_IP}_FOTOS_${TIMESTAMP}.tar.gz"
 tar -czvf "$TAR_OUTPUT" "$OUTPUT_DIR"
 aws s3 cp "$TAR_OUTPUT" "$S3_DESTINATION/${TAR_OUTPUT}"
 
-rm ./*.tar.gz
+rm -rf ./*.tar.gz
 rm -rf $OUTPUT_DIR
