@@ -22,18 +22,14 @@ for ((i = 1; i <= NUM_PICTURES; i++)); do
     TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
     OUTPUT_FILE="$OUTPUT_DIR/snapshot_$TIMESTAMP.png"
     OUTPUT_FILE_JPG="$OUTPUT_DIR/snapshot_$TIMESTAMP.jpg"
-
     # Capture a single frame
-    ffmpeg -i "$RTSP_URL" -vf "select=eq(pict_type\,I)" -vframes 1 -c:v libx264 -crf 0 "$OUTPUT_FILE"
-    ffmpeg -i "$OUTPUT_FILE" "$OUTPUT_FILE_JPG"
+    ffmpeg -i "$RTSP_URL" -vf "select=eq(pict_type\,I)" -vframes 1 -c:v libx264 -crf 0 "$OUTPUT_FILE" >ffmpeg.log 2>&1
 
-    echo "Captured picture $i at $TIMESTAMP"
-
-    # if [ $? -eq 0 ]; then
-    #     echo "File uploaded to S3 successfully."
-    # else
-    #     echo "File upload to S3 failed."
-    # fi
+    if [ $? -eq 0 ]; then
+        echo "CONVERSION"
+        ffmpeg -i "$OUTPUT_FILE" "$OUTPUT_FILE_JPG"
+        echo "Captured picture $i at $TIMESTAMP"
+    fi
 
     if [ $i -lt $NUM_PICTURES ]; then
         sleep $INTERVAL_SECONDS
@@ -43,5 +39,12 @@ done
 TAR_OUTPUT="${CAM_IP}_FOTOS_${TIMESTAMP}.tar.gz"
 tar -czvf "$TAR_OUTPUT" "$OUTPUT_DIR"
 aws s3 cp "$TAR_OUTPUT" "$S3_DESTINATION/${TAR_OUTPUT}"
+
+if [ $? -eq 0 ]; then
+    echo "File uploaded to S3 successfully."
+else
+    echo "File upload to S3 failed."
+fi
+
 rm -rf ./*.tar.gz
 rm -rf $OUTPUT_DIR
