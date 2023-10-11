@@ -7,7 +7,7 @@ CAM_IP=$1
 PASSWORD="camarasuncosma2020"
 OUTPUT_DIR="/home/admintaller/FOTOS_${CAM_IP}"
 RTSP_URL="rtsp://admin:${PASSWORD}@${CAM_IP}:554/cam/realmonitor?channel=1&subtype=0"
-mkdir -p $OUTPUT_DIR
+mkdir -p "$OUTPUT_DIR"
 
 NUM_PICTURES=5
 INTERVAL_SECONDS=30
@@ -41,8 +41,8 @@ for ((i = 1; i <= NUM_PICTURES; i++)); do
 done
 
 TAR_OUTPUT="${CAM_IP}_FOTOS_${TIMESTAMP}.tar.gz"
-tar -czvf "$TAR_OUTPUT" $OUTPUT_DIR
+tar -czvf "$TAR_OUTPUT" "$OUTPUT_DIR"
 aws s3 cp "$TAR_OUTPUT" "$S3_DESTINATION/${TAR_OUTPUT}"
 
-rm ./*.tar
+rm ./*.tar.gz
 rm -rf $OUTPUT_DIR
