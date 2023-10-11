@@ -1,6 +1,6 @@
 #!/bin/bash
 set -xe
-source .env.prod
+source /home/admintaller/git/rto_photos/.env.prod
 
 CAM_IP=$1
 
