@@ -38,7 +38,7 @@ done
 
 TAR_OUTPUT="${CAM_IP}_FOTOS_${TIMESTAMP}.tar.gz"
 tar -czvf "$TAR_OUTPUT" "$OUTPUT_DIR"
-/usr/bin/local/aws s3 cp "$TAR_OUTPUT" "$S3_DESTINATION/${TAR_OUTPUT}" --config /home/admintaller/.aws/config --credentials /home/admintaller/.aws/credentials
+/usr/local/bin/aws s3 cp "$TAR_OUTPUT" "$S3_DESTINATION/${TAR_OUTPUT}" --config /home/admintaller/.aws/config --credentials /home/admintaller/.aws/credentials
 
 if [ $? -eq 0 ]; then
     echo "File uploaded to S3 successfully."
