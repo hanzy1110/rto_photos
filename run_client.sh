@@ -12,7 +12,7 @@ mkdir -p "$OUTPUT_DIR"
 NUM_PICTURES=5
 INTERVAL_SECONDS=30
 
-S3_DESTINATION="s3://rto-nqn-files/FOTOS_TALLER"
+S3_DESTINATION="s3://rto-nqn-files/FOTOS_TALLER_RIO_COLORADO"
 
 # /usr/bin/local/aws configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
 # /usr/bin/local/aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
